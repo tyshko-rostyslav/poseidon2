@@ -4,19 +4,19 @@ use crate::utils;
 
 #[derive(Clone, Debug)]
 pub struct PoseidonParams<S: PrimeField> {
-    pub(crate) t: usize, // statesize
-    pub(crate) d: usize, // sbox degree
-    pub(crate) rounds_f_beginning: usize,
-    pub(crate) rounds_p: usize,
+    pub t: usize, // statesize
+    pub d: usize, // sbox degree
+    pub rounds_f_beginning: usize,
+    pub rounds_p: usize,
     #[allow(dead_code)]
-    pub(crate) rounds_f_end: usize,
-    pub(crate) rounds: usize,
-    pub(crate) mds: Vec<Vec<S>>,
-    pub(crate) round_constants: Vec<Vec<S>>,
-    pub(crate) opt_round_constants: Vec<Vec<S>>, // optimized
-    pub(crate) w_hat: Vec<Vec<S>>,               // optimized
-    pub(crate) v: Vec<Vec<S>>,                   // optimized
-    pub(crate) m_i: Vec<Vec<S>>,                 // optimized
+    pub rounds_f_end: usize,
+    pub rounds: usize,
+    pub mds: Vec<Vec<S>>,
+    pub round_constants: Vec<Vec<S>>,
+    pub opt_round_constants: Vec<Vec<S>>, // optimized
+    pub w_hat: Vec<Vec<S>>,               // optimized
+    pub v: Vec<Vec<S>>,                   // optimized
+    pub m_i: Vec<Vec<S>>,                 // optimized
 }
 
 impl<S: PrimeField> PoseidonParams<S> {

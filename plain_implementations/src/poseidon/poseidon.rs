@@ -5,7 +5,7 @@ use std::sync::Arc;
 
 #[derive(Clone, Debug)]
 pub struct Poseidon<S: PrimeField> {
-    pub(crate) params: Arc<PoseidonParams<S>>,
+    pub params: Arc<PoseidonParams<S>>,
 }
 
 impl<S: PrimeField> Poseidon<S> {
@@ -75,11 +75,11 @@ impl<S: PrimeField> Poseidon<S> {
         current_state
     }
 
-    fn sbox(&self, input: &[S]) -> Vec<S> {
+    pub fn sbox(&self, input: &[S]) -> Vec<S> {
         input.iter().map(|el| self.sbox_p(el)).collect()
     }
 
-    fn sbox_p(&self, input: &S) -> S {
+    pub fn sbox_p(&self, input: &S) -> S {
         let mut input2 = *input;
         input2.square_in_place();
 
@@ -108,7 +108,7 @@ impl<S: PrimeField> Poseidon<S> {
         }
     }
 
-    fn cheap_matmul(&self, input: &[S], r: usize) -> Vec<S> {
+    pub fn cheap_matmul(&self, input: &[S], r: usize) -> Vec<S> {
         let v = &self.params.v[r];
         let w_hat = &self.params.w_hat[r];
         let t = self.params.t;
@@ -130,7 +130,7 @@ impl<S: PrimeField> Poseidon<S> {
         new_state
     }
 
-    fn matmul(&self, input: &[S], mat: &[Vec<S>]) -> Vec<S> {
+    pub fn matmul(&self, input: &[S], mat: &[Vec<S>]) -> Vec<S> {
         let t = mat.len();
         debug_assert!(t == input.len());
         let mut out = vec![S::zero(); t];
@@ -144,7 +144,7 @@ impl<S: PrimeField> Poseidon<S> {
         out
     }
 
-    fn add_rc(&self, input: &[S], rc: &[S]) -> Vec<S> {
+    pub fn add_rc(&self, input: &[S], rc: &[S]) -> Vec<S> {
         input
             .iter()
             .zip(rc.iter())
